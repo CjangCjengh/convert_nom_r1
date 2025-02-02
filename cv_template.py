@@ -84,7 +84,7 @@ def quoc_ngu_in_dict(qn, dict):
 def generate_prompt(vi_text, zh_text):
     word_details_list = []
     words = re.findall(r'\b\w+\b', vi_text)
-    nom_options = {}
+    nom_options = []
     for word in words:
         representations_list = []
         word_lower = word.lower()
@@ -99,7 +99,7 @@ def generate_prompt(vi_text, zh_text):
             noms.extend(hans_list)
             representations_list.append('     - Other Han Việt characters : ' + ', '.join(hans_list))
         if len(noms) > 0:
-            nom_options[word] = noms
+            nom_options.append([word, noms])
         if len(representations_list) > 0:
             word_detail = f'{len(word_details_list)+1}. Quốc Ngữ Word: {word}\n' + '\n'.join(representations_list)
             word_details_list.append(word_detail)

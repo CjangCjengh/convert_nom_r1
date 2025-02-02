@@ -63,7 +63,7 @@ def get_response(prompt):
     return json_data
 
 def check_nom_script(nom_text, nom_options):
-    nom_groups = [v for v in nom_options.values()]
+    nom_groups = [v[1] for v in nom_options]
     group_ptr = 0
     for c in nom_text:
         if c in nom_groups[group_ptr]:
