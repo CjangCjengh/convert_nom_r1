@@ -113,8 +113,7 @@ def split_at_punctuation(text: str) -> tuple[str, str]:
 def process_with_split(vi_text: str, zh_text: str) -> str:
     try:
         return get_nom_text(vi_text, zh_text)
-    except ValueError as e:
-        assert e.args[0] == 'No generation chunks were returned'
+    except:
         first_half, second_half = split_at_punctuation(vi_text)
         first_result = process_with_split(first_half, zh_text)
         second_result = process_with_split(second_half, zh_text)
