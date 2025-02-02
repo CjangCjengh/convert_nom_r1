@@ -18,12 +18,15 @@ Please find the possible Nôm script candidates for each word in the Quốc Ng�
 {word_details}
 
 Your task is to choose the most suitable Nôm script for each word based on its meaning in the context of the entire text.
+If a word has no Nôm script candidates provided, keep the original word as is.
+For proper nouns such as person names and place names, refer to the Chinese translation to select candidates - the appropriate choice is typically the traditional Chinese characters corresponding to that proper noun.
+Nôm script does not require spaces between characters. Please use full-width punctuation marks, including ，。……“”：；！？（）【】
 
 Output the complete Nôm script translation of the given Quốc Ngữ text in JSON format:
 ```json
 {{
     "quoc_ngu": "{viet_text}"
-    "chu_nom": "Your answer here. Nôm script does not require spaces. Please use full-width punctuation."
+    "chu_nom": "Nôm script here."
 }}
 ```'''
 
@@ -81,16 +84,22 @@ def quoc_ngu_in_dict(qn, dict):
 def generate_prompt(vi_text, zh_text):
     word_details_list = []
     words = re.findall(r'\b\w+\b', vi_text)
+    nom_options = {}
     for word in words:
         representations_list = []
         word_lower = word.lower()
+        noms = []
         meanings_list = quoc_ngu_in_dict(word_lower, chars_dict)
         if meanings_list is not None:
+            noms.extend([n['char'] for n in meanings_list])
             for _, nom in enumerate(meanings_list, start=1):
                 representations_list.append(f'     - {nom["char"]} : {nom["words"]}')
         hans_list = quoc_ngu_in_dict(word_lower, hans_dict)
         if hans_list is not None:
+            noms.extend(hans_list)
             representations_list.append('     - Other Han Việt characters : ' + ', '.join(hans_list))
+        if len(noms) > 0:
+            nom_options[word] = noms
         if len(representations_list) > 0:
             word_detail = f'{len(word_details_list)+1}. Quốc Ngữ Word: {word}\n' + '\n'.join(representations_list)
             word_details_list.append(word_detail)
@@ -102,7 +111,4 @@ def generate_prompt(vi_text, zh_text):
         word_details=word_details
     )
     prompt_filled = prompt_filled.replace('※𡨸翻音', '※Phonetic transcription character')
-    return prompt_filled
-
-if __name__ == '__main__':
-    print(generate_prompt('Từng người từng người chen vai đứng cạnh nhau, tắm mình trong ánh trăng, khuôn mặt vô hồn đang rũ mắt xuống, nhìn xác chết trên sàn nhà.','那一个个肩并肩站立的人，就沐浴在月光之中，面无表情地垂着眼睛，俯视地上的尸体。'))
+    return prompt_filled, nom_options

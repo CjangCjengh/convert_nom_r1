@@ -32410,11 +32410,11 @@
     "năm": [
         {
             "char": "𠄼",
-            "words": "𠄼𱑕 năm mươi, 計劃𠄼𢆥 kế hoạch năm năm, 𠄼𣇞倲 năm giờ đúng, 𠄼𤾓 năm trăm"
+            "words": "𠄼𱑕 năm mươi, 𠄼𤾓 năm trăm"
         },
         {
             "char": "𢆥",
-            "words": "𢆥㵋 năm mới, 𢆥𣎃 năm tháng, 𢆥𧘇 năm ấy, 𢆥學 năm học, 𢆥歲 năm tuổi"
+            "words": "𢆥㵋 năm mới, 𢆥𣎃 năm tháng, 𢆥𧘇 năm ấy, 𢆥學 năm học"
         }
     ],
     "nắp": [
@@ -47393,6 +47393,12 @@
         {
             "char": "閣",
             "words": "閣𢫆 cac bon"
+        }
+    ],
+    "quầng": [
+        {
+            "char": "𤓇",
+            "words": "深𤓇眜 thâm quầng mắt"
         }
     ]
 }
