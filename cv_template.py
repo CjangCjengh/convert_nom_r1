@@ -9,7 +9,7 @@ with open(chars_path,'r',encoding='utf-8') as f:
 with open(hans_path,'r',encoding='utf-8') as f:
     hans_dict = json.load(f)
 
-template = '''Translate the following Vietnamese text written in Quốc Ngữ into Nôm script. Below is the text in Quốc Ngữ with its Chinese translation. For each word in Quốc Ngữ, I will provide possible Nôm script representations (including both native Nôm characters and Han Việt/Sino-Vietnamese characters) with example phrases. Use this information to produce the accurate Nôm script translation.
+template = '''Translate the following Vietnamese text written in Quốc Ngữ into Nôm script. Below is the text in Quốc Ngữ with its Chinese translation. Sometimes the Quốc Ngữ Text only corresponds to a portion of the Chinese translation. For each word in Quốc Ngữ, I will provide possible Nôm script representations (including both native Nôm characters and Han Việt/Sino-Vietnamese characters) with example phrases. Use this information to produce the accurate Nôm script translation.
 
 Quốc Ngữ Text: {viet_text}
 Chinese Translation: {chinese_translation}
