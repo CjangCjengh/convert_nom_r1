@@ -111,6 +111,8 @@ def split_at_punctuation(text: str) -> tuple[str, str]:
     return text[:split_pos + 1].strip(), text[split_pos + 1:].strip()
 
 def process_with_split(vi_text: str, zh_text: str) -> str:
+    if vi_text == '':
+        return ''
     try:
         return get_nom_text(vi_text, zh_text)
     except:
